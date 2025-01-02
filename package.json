@@ -2,12 +2,18 @@
 	"name": "bunapi",
 	"type": "module",
 	"scripts": {
-		"dev": "bun run --hot src/index.ts"
+		"dev": "bun run --hot src/main.ts",
+		"fc": "bunx prettier --write . && bunx eslint --fix . && bunx prettier --check . && pnpm eslint ."
 	},
 	"dependencies": {
 		"hono": "^4.6.15"
 	},
 	"devDependencies": {
-		"@types/bun": "latest"
+		"@eslint/js": "^9.17.0",
+		"@types/bun": "latest",
+		"eslint": "^9.17.0",
+		"globals": "^15.14.0",
+		"prettier": "^3.4.2",
+		"typescript-eslint": "^8.19.0"
 	}
 }
