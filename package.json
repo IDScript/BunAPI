@@ -3,9 +3,11 @@
 	"type": "module",
 	"scripts": {
 		"dev": "bun run --hot src/main.ts",
-		"fc": "bunx prettier --write . && bunx eslint --fix . && bunx prettier --check . && pnpm eslint ."
+		"fc": "bunx prettier --write . && bunx eslint --fix . && bunx prettier --check . && pnpm eslint .",
+		"mig": "rm -rf prisma/migrations && bunx prisma generate && bunx prisma migrate dev --name init"
 	},
 	"dependencies": {
+		"@prisma/client": "^6.1.0",
 		"hono": "^4.6.15"
 	},
 	"devDependencies": {
@@ -14,6 +16,7 @@
 		"eslint": "^9.17.0",
 		"globals": "^15.14.0",
 		"prettier": "^3.4.2",
+		"prisma": "^6.1.0",
 		"typescript-eslint": "^8.19.0"
 	}
 }
