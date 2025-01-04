@@ -1,7 +1,11 @@
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+  email    String  @unique
+  username String  @id @db.VarChar(100)
+  password String  @db.VarChar(100)
+  name     String  @db.VarChar(100)
+  token    String? @db.VarChar(100)
+
+  contacts Contact[]
 
   @@map("users")
 }
