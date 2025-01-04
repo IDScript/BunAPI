@@ -26,6 +26,19 @@ describe("POST /api/users", () => {
 		expect(body.errors).toBeDefined();
 	});
 
+	it("should reject register new user if request is invalid 2", async () => {
+		const response = await app.request("/api/users", {
+			method: "post",
+			body: JSON.stringify({}),
+		});
+
+		const body = await response.json();
+		logger.debug(body);
+
+		expect(response.status).toBe(400);
+		expect(body.errors).toBeDefined();
+	});
+
 	it("should reject register new user if username already exists", async () => {
 		await UserTest.create();
 
