@@ -7,6 +7,11 @@ export type RegisterUserRequest = {
 	name: string;
 };
 
+export type LoginUserRequest = {
+	username: string;
+	password: string;
+};
+
 export type UserResponse = {
 	email: string;
 	username: string;

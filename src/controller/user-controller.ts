@@ -1,8 +1,12 @@
 import { Hono } from "hono";
-import { type RegisterUserRequest } from "../model/user-model";
+import {
+	type LoginUserRequest,
+	type RegisterUserRequest,
+} from "../model/user-model";
 import { UserService } from "../service/user-service";
 import type { ApplicationVariables } from "../model/app-model";
 import { log } from "../config/logger";
+import { HTTPException } from "hono/http-exception";
 
 export const userController = new Hono<{ Variables: ApplicationVariables }>();
 
@@ -13,11 +17,24 @@ userController.post("/users", async (c) => {
 	try {
 		request = JSON.parse(text) as RegisterUserRequest;
 	} catch {
-		return c.json({ error: "invalid json" }, 400);
+		log.error("Invalid json request " + text);
+		throw new HTTPException(400, {
+			message: "invalid json",
+		});
 	}
 
 	const response = await UserService.register(request);
 	log.info("Registering user", response);
+
+	return c.json({
+		data: response,
+	});
+});
+
+userController.post("/users/login", async (c) => {
+	const request = (await c.req.json()) as LoginUserRequest;
+
+	const response = await UserService.login(request);
 
 	return c.json({
 		data: response,
