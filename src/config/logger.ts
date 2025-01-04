@@ -1,4 +1,3 @@
-import "dotenv/config";
 import { createLogger, format, transports } from "winston";
 
 const { combine, timestamp, printf, colorize } = format;
@@ -7,7 +6,7 @@ const logsFormat = printf(({ level, message, timestamp }) => {
 	return `${timestamp}|[${level.toUpperCase()}]|${message}|`;
 });
 
-const logLevel: string = process.env.LOG_LEVEL ?? "warn";
+const logLevel: string = Bun.env.LOG_LEVEL ?? "warn";
 const todayDate: string = new Date().toISOString().slice(0, 10);
 const logFolder: string = `./logs/${todayDate.replace(/-/g, "")}/${todayDate}`;
 

@@ -1,6 +1,5 @@
 import { Hono } from "hono";
 import { ZodError } from "zod";
-import { config } from "dotenv";
 import pkg from "../package.json";
 import { log } from "./config/logger";
 import { prismaClient } from "./config/database";
@@ -8,9 +7,7 @@ import { HTTPException } from "hono/http-exception";
 import { serve, type ServerType } from "@hono/node-server";
 import { userController } from "./controller/user-controller";
 
-config();
-
-const port: number = Number(process.env.API_PORT ?? 3030);
+const port: number = Number(Bun.env.API_PORT ?? 3030);
 
 export const app = new Hono().basePath("/api");
 
@@ -18,8 +15,8 @@ app.get("/", (c) => {
 	return c.json(
 		{
 			message: pkg.description ?? "KAnggara Web APP",
-			version: process.env.APP_VERSION ?? pkg.version ?? "0.0.1",
-			stability: process.env.APP_STAB ?? "Developer-Preview",
+			version: Bun.env.APP_VERSION ?? pkg.version ?? "0.0.1",
+			stability: Bun.env.APP_STAB ?? "Developer-Preview",
 		},
 		200
 	);
