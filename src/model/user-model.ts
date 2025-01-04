@@ -12,6 +12,11 @@ export type LoginUserRequest = {
 	password: string;
 };
 
+export type UpdateUserRequest = {
+	password?: string;
+	name?: string;
+};
+
 export type UserResponse = {
 	email: string;
 	username: string;
