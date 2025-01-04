@@ -22,24 +22,14 @@ const myTransports: (
 		filename: `${logFolder}-warn.log`,
 		level: "warn",
 	}),
-	new transports.File({
-		filename: `${logFolder}-info.log`,
-		level: "info",
-	}),
-	new transports.File({
-		filename: `${logFolder}-query.log`,
-		level: "verbose",
-	}),
 ];
 
-/* istanbul ignore next */
 if (logLevel == "warn") {
 	myTransports.push(
 		new transports.Console({
 			level: "warn",
 		})
 	);
-	/* istanbul ignore next */
 } else if (logLevel == "info") {
 	myTransports.push(
 		new transports.Console({
