@@ -6,6 +6,7 @@ import { prismaClient } from "./config/database";
 import { HTTPException } from "hono/http-exception";
 import { serve, type ServerType } from "@hono/node-server";
 import { userController } from "./controller/user-controller";
+import { contactController } from "./controller/contact-controller";
 
 const port: number = Number(Bun.env.API_PORT ?? 3030);
 
@@ -23,6 +24,7 @@ app.get("/", (c) => {
 });
 
 app.route("/", userController);
+app.route("/", contactController);
 
 app.notFound((c) => {
 	return c.json({ errors: "Not Found" }, 404);
