@@ -12,7 +12,7 @@ config();
 
 const port: number = Number(process.env.API_PORT ?? 3030);
 
-const app = new Hono().basePath("/api");
+export const app = new Hono().basePath("/api");
 
 app.get("/", (c) => {
 	return c.json(
@@ -49,7 +49,6 @@ const server: ServerType = serve({
 const events = ["uncaughtException", "SIGINT", "SIGTERM"];
 
 events.forEach((eventName) => {
-	log.info("listening on ", eventName);
 	process.on(eventName, (...args) => {
 		gracefulShutdown();
 		log.info(`${eventName} was called with args : ${args.join(",")}`);
