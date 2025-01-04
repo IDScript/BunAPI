@@ -8,7 +8,6 @@ const logsFormat = printf(({ level, message, timestamp }) => {
 });
 
 const logLevel: string = process.env.LOG_LEVEL ?? "warn";
-console.error(logLevel);
 const todayDate: string = new Date().toISOString().slice(0, 10);
 const logFolder: string = `./logs/${todayDate.replace(/-/g, "")}/${todayDate}`;
 
