@@ -65,3 +65,13 @@ userController.patch("/users/current", async (c) => {
 		data: response,
 	});
 });
+
+userController.delete("/users/current", async (c) => {
+	const user = c.get("user") as User;
+
+	const response = await UserService.logout(user);
+
+	return c.json({
+		data: response,
+	});
+});
