@@ -1,5 +1,7 @@
 {
 	"name": "bunapi",
+	"description": "Restful API by IDScript",
+	"version": "0.1.0",
 	"type": "module",
 	"scripts": {
 		"dev": "bun run --hot src/main.ts",
@@ -7,6 +9,7 @@
 		"mig": "rm -rf prisma/migrations && bunx prisma generate && bunx prisma migrate dev --name init"
 	},
 	"dependencies": {
+		"@hono/node-server": "^1.13.7",
 		"@prisma/client": "^6.1.0",
 		"dotenv": "^16.4.7",
 		"hono": "^4.6.15",

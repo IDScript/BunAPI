@@ -1,23 +1,28 @@
-import { Hono, type Env, type ExecutionContext } from "hono";
+import { Hono } from "hono";
 import { ZodError } from "zod";
 import { config } from "dotenv";
-import { HTTPException } from "hono/http-exception";
+import pkg from "../package.json";
 import { logger } from "./config/logger";
-import { serve, type ServerType } from "@hono/node-server";
 import { prismaClient } from "./config/database";
-import { error } from "winston";
+import { HTTPException } from "hono/http-exception";
+import { serve, type ServerType } from "@hono/node-server";
 
 config();
 
 const port: number = Number(process.env.API_PORT ?? 3030);
-const version: string = process.env.APP_VERSION ?? "0.0.1-alpha";
 
 const app = new Hono().basePath("/api");
 
 app.get("/", (c) => {
+	const msg: string = pkg.description ?? "KAnggara Web APP";
+	const stab: string = process.env.APP_STAB ?? "Developer-Preview";
+	const version: string = process.env.APP_VERSION ?? pkg.version ?? "0.0.1";
+
 	return c.json(
 		{
-			message: version,
+			message: msg,
+			version: version,
+			stability: stab,
 		},
 		404
 	);
