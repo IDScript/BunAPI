@@ -2,9 +2,12 @@ import { Hono } from "hono";
 import {
 	type LoginUserRequest,
 	type RegisterUserRequest,
+	toUserResponse,
 } from "../model/user-model";
 import { UserService } from "../service/user-service";
 import type { ApplicationVariables } from "../model/app-model";
+import type { User } from "@prisma/client";
+import { authMiddleware } from "../middleware/auth-middleware";
 import { log } from "../config/logger";
 import { HTTPException } from "hono/http-exception";
 
@@ -38,5 +41,15 @@ userController.post("/users/login", async (c) => {
 
 	return c.json({
 		data: response,
+	});
+});
+
+userController.use(authMiddleware);
+
+userController.get("/users/current", async (c) => {
+	const user = c.get("user") as User;
+
+	return c.json({
+		data: toUserResponse(user),
 	});
 });

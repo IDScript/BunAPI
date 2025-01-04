@@ -7,6 +7,7 @@ import {
 import { UserValidation } from "../validation/user-validation";
 import { prismaClient } from "../config/database";
 import { HTTPException } from "hono/http-exception";
+import type { User } from "@prisma/client";
 import { log } from "../config/logger";
 
 export class UserService {
@@ -50,7 +51,7 @@ export class UserService {
 
 		if (!user) {
 			throw new HTTPException(401, {
-				message: "Username or password is wrong",
+				message: "Username or Password is wrong",
 			});
 		}
 
@@ -77,5 +78,31 @@ export class UserService {
 		const response = toUserResponse(user);
 		response.token = user.token!;
 		return response;
+	}
+
+	static async get(token: string | undefined | null): Promise<User> {
+		const result = UserValidation.TOKEN.safeParse(token);
+
+		if (result.error) {
+			throw new HTTPException(401, {
+				message: "Unauthorized",
+			});
+		}
+
+		token = result.data;
+
+		const user = await prismaClient.user.findFirst({
+			where: {
+				token: token,
+			},
+		});
+
+		if (!user) {
+			throw new HTTPException(401, {
+				message: "Unauthorized",
+			});
+		}
+
+		return user;
 	}
 }
