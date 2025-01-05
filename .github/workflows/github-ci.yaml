@@ -2,9 +2,9 @@ name: Unit Test 🧪
 
 on:
   push:
-    branches: ["main", "dev", "qa"]
+    branches: ["main", "stg"]
   pull_request:
-    branches: ["main", "dev", "qa"]
+    branches: ["main", "stg"]
 
 jobs:
   Format_and_Check:
@@ -71,4 +71,4 @@ jobs:
       - name: Generating coverage badges
         uses: jpb06/jest-badges-action@v1.9.18
         with:
-          branches: main,dev
+          branches: main, stg
