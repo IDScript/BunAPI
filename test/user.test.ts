@@ -20,7 +20,7 @@ describe("POST /api/users", () => {
 		});
 
 		const body = await response.json();
-		logger.error(JSON.stringify(body));
+		logger.debug(JSON.stringify(body));
 
 		expect(response.status).toBe(400);
 		expect(body.errors).toBeDefined();
@@ -32,7 +32,7 @@ describe("POST /api/users", () => {
 		});
 
 		const body = await response.json();
-		logger.error(JSON.stringify(body));
+		logger.debug(JSON.stringify(body));
 
 		expect(response.status).toBe(400);
 		expect(body.errors).toBeDefined();
@@ -52,7 +52,7 @@ describe("POST /api/users", () => {
 		});
 
 		const body = await response.json();
-		logger.error(JSON.stringify(body));
+		logger.debug(JSON.stringify(body));
 
 		expect(response.status).toBe(400);
 		expect(body.errors).toBeDefined();
@@ -226,7 +226,7 @@ describe("PATCH /api/users/current", () => {
 		expect(response.status).toBe(200);
 
 		const body = await response.json();
-		logger.error(JSON.stringify(body));
+		logger.debug(JSON.stringify(body));
 		expect(body.data).toBeDefined();
 		expect(body.data.name).toBe("IDScript");
 	});
@@ -245,7 +245,7 @@ describe("PATCH /api/users/current", () => {
 		expect(response.status).toBe(200);
 
 		const body = await response.json();
-		logger.error(JSON.stringify(body));
+		logger.debug(JSON.stringify(body));
 		expect(body.data).toBeDefined();
 		expect(body.data.name).toBe("test");
 

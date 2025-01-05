@@ -29,6 +29,7 @@ app.route("/", contactController);
 app.route("/", addressController);
 
 app.notFound((c) => {
+	log.info(`Not Found: ${c.req.url}`);
 	return c.json({ errors: "Not Found" }, 404);
 });
 
