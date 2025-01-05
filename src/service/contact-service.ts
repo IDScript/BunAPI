@@ -18,7 +18,7 @@ export class ContactService {
 	): Promise<ContactResponse> {
 		request = ContactValidation.CREATE.parse(request);
 
-		let data = {
+		const data = {
 			...request,
 			...{ username: user.username },
 		};
