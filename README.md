@@ -1,3 +1,5 @@
+![coverage](coverage.svg)
+
 To install dependencies:
 
 ```sh

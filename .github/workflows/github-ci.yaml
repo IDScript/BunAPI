@@ -5,6 +5,7 @@ on:
     branches: ["main", "stg"]
     paths-ignore:
       - "**/coverage.svg"
+      - "**/*.md"
   pull_request:
     branches: ["main", "stg"]
 
@@ -74,7 +75,7 @@ jobs:
         uses: ImBIOS/lcov-coverage-badge@v1
         with:
           file: ./coverage/lcov.info
-          access_token: ${{ secrets.GITHUB_TOKEN }}
+          access_token: ${{ secret.GITHUB_TOKEN }}
           style: flat
           icon_name: googlecloud
           icon_color: "ffffff"
