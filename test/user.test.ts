@@ -1,7 +1,7 @@
 import { describe, it, expect, afterEach, beforeEach } from "bun:test";
 import { log as logger } from "../src/config/logger";
 import { UserTest } from "./test-util";
-import { app } from "../src/main";
+import { app } from "../src";
 
 describe("POST /api/users", () => {
 	afterEach(async () => {

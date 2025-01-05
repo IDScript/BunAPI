@@ -3,8 +3,10 @@
 	"description": "Restful API by IDScript",
 	"version": "0.1.0",
 	"type": "module",
+	"main": "src/index.ts",
+	"module": "src/index.ts",
 	"scripts": {
-		"dev": "bun run --hot src/main.ts",
+		"dev": "bun run --hot src/index.ts",
 		"fc": "bunx prettier --write . && bunx eslint --fix . && bunx prettier --check . && pnpm eslint .",
 		"mig": "rm -rf prisma/migrations && bunx prisma generate && bunx prisma migrate dev --name init"
 	},

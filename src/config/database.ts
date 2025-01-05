@@ -21,15 +21,12 @@ export const prismaClient = new PrismaClient({
 		},
 	],
 });
-/* istanbul ignore next */
-prismaClient.$on("error", (event: Prisma.LogEvent): void => {
-	log.error(event);
+prismaClient.$on("error", (e: Prisma.LogEvent): void => {
+	log.error(e);
 });
-/* istanbul ignore next */
 prismaClient.$on("warn", (e: Prisma.LogEvent): void => {
 	log.warn(e);
 });
-
 prismaClient.$on("info", (e: Prisma.LogEvent): void => {
 	log.info(e);
 });
